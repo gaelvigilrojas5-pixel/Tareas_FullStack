@@ -1,10 +1,10 @@
-Note right of browser: Another user writes a new note from a different device and clicks submit
+Note right of browser: An external client from a mobile device submits a fresh note
 browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
 activate server
-server-->>browser: 302 Redirection (URL /notes)
+server-->>browser: 302 Found (Redirect location: /notes)
 deactivate server
 
-Note right of browser: The browser processes the redirect by requesting the updated main page
+Note right of browser: The browser handles the HTTP redirect and fetches the fresh document
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
 activate server
 server-->>browser: HTML document
@@ -20,7 +20,7 @@ activate server
 server-->>browser: JavaScript script file
 deactivate server
 
-Note right of browser: The browser executes the script to request the updated data from the server
+Note right of browser: The client-side script parses the environment and requests the payload source
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
 activate server
@@ -30,4 +30,4 @@ server-->>browser: [{
 }, ... ]
 deactivate server
 
-Note right of browser: The callback function runs, updates the DOM, and renders the notes on screen
+Note right of browser: The callback executes, rebuilding the DOM elements to display all entries
