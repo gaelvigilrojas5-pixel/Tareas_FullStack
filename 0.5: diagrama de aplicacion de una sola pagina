@@ -1,10 +1,12 @@
-Note right of browser: A different user sends a new note using the Single Page Application interface
+Note right of browser: A remote user submits a new entry via the Single Page Application interface
+Note right of browser: The client catches the submit action and handles event propagation
 browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
 activate server
 server-->>browser: 201 Created (JSON response)
 deactivate server
 
-Note right of browser: The application prevents page reload; JavaScript updates the DOM dynamically
+Note right of browser: Default page reload is bypassed; frontend script updates the DOM immediately
+Note right of browser: The local application state prepares to synchronize with the backend
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
 activate server
@@ -21,7 +23,8 @@ activate server
 server-->>browser: SPA JavaScript bundle
 deactivate server
 
-Note right of browser: The script executes an asynchronous request to fetch the latest entries
+Note right of browser: The script triggers an asynchronous fetch to retrieve the latest data entries
+Note right of browser: The browser awaits the network response stream
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
 activate server
@@ -31,4 +34,5 @@ server-->>browser: [{
 }, ... ]
 deactivate server
 
-Note right of browser: The client-side callback processes the JSON array and renders the updated note list
+Note right of browser: The client-side callback iterates through the JSON payload and displays the refreshed notes
+Note right of browser: UI rendering cycle is fully complete
