@@ -1,0 +1,33 @@
+Note right of browser: Another user writes a new note from a different device and clicks submit
+browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+activate server
+server-->>browser: 302 Redirection (URL /notes)
+deactivate server
+
+Note right of browser: The browser processes the redirect by requesting the updated main page
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+activate server
+server-->>browser: HTML document
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server-->>browser: CSS stylesheet
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+activate server
+server-->>browser: JavaScript script file
+deactivate server
+
+Note right of browser: The browser executes the script to request the updated data from the server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server-->>browser: [{ 
+    "content": "successful commit in production",
+    "date": "2026-08-23T21:40:05.451Z"
+}, ... ]
+deactivate server
+
+Note right of browser: The callback function runs, updates the DOM, and renders the notes on screen
