@@ -1,10 +1,12 @@
 Note right of browser: An external client from a mobile device submits a fresh note
+Note right of browser: The form data is transmitted via standard HTTP POST action
 browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
 activate server
 server-->>browser: 302 Found (Redirect location: /notes)
 deactivate server
 
 Note right of browser: The browser handles the HTTP redirect and fetches the fresh document
+Note right of browser: A new document request sequence is initiated by the client
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
 activate server
 server-->>browser: HTML document
@@ -21,6 +23,7 @@ server-->>browser: JavaScript script file
 deactivate server
 
 Note right of browser: The client-side script parses the environment and requests the payload source
+Note right of browser: Execution proceeds to fetch the underlying dataset
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
 activate server
@@ -31,3 +34,4 @@ server-->>browser: [{
 deactivate server
 
 Note right of browser: The callback executes, rebuilding the DOM elements to display all entries
+Note right of browser: Page update cycle finishes successfully
