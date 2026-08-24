@@ -1,0 +1,14 @@
+Note right of browser: A remote user on an external device triggers the save action
+Note right of browser: The event listener intercepts the submit event on the form
+Note right of browser: e.preventDefault() stops the standard HTTP redirection and page refresh
+Note right of browser: The application updates the local view model and invokes redrawNotes()
+
+Note right of browser: Background synchronization routine executes sendToServer(note)
+browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+activate server
+Note right of browser: The asynchronous HTTP request carries the external JSON payload
+server-->>browser: {"message":"note created"}
+server-->>browser: 201 Created
+deactivate server
+
+Note right of browser: The callback receives the server acknowledgment. Synchronization complete.
